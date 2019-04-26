@@ -17,10 +17,30 @@
               <i class="ion-gear-a"></i>&nbsp;Settings
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Sign up</a>
+          <li v-if="username" class="nav-item">
+            <router-link class="nav-link" :to="'/@' + username">
+              {{ username }}
+            </router-link>
+          </li>
+          <li v-if="!username" class="nav-item">
+            <router-link class="nav-link" to="/register"> Sign up </router-link>
+          </li>
+          <li v-if="!username" class="nav-item">
+            <router-link class="nav-link" to="/login"> Sign in </router-link>
           </li>
         </ul>
       </div>
     </nav>
 </template>
+
+<script>
+import { Vue, Component } from 'vue-property-decorator';
+import users from '@/store/modules/users';
+
+@Component
+export default class AppNavbar extends Vue {
+  get username() {
+    return users.username;
+  }
+}
+</script>

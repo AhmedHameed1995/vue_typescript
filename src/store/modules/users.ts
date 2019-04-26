@@ -16,6 +16,10 @@ class UserModule extends VuexModule {
     @Mutation
     public setUser(user: User) { this.user = user; }
 
+    get username() {
+        return this.user && this.user.username || null;
+    }
+
     @Action({commit: 'setUser'})
     public async login(userSubmit: UserSubmit) {
         const user = await loginUser(userSubmit);
