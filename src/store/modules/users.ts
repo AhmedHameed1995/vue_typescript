@@ -41,6 +41,12 @@ class UserModule extends VuexModule {
     }
 
     @MutationAction
+    public async loadUser() {
+        const user = await fetchUser();
+        return { user };
+    }
+
+    @MutationAction
     public async updateSelfProfile(userUpdateFields: UserForUpdate) {
         const user = await updateUser(userUpdateFields);
         return { user };
