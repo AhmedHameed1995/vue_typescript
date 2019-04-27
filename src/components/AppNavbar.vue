@@ -7,15 +7,15 @@
             <!-- Add "active" class when you're on that page" -->
             <a class="nav-link active" href="">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-compose"></i>&nbsp;New Post
-            </a>
+          <li v-if="username" class="nav-item">
+            <router-link class="nav-link" to="/editor">
+              New Article
+            </router-link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-gear-a"></i>&nbsp;Settings
-            </a>
+          <li v-if="username" class="nav-item">
+            <router-link class="nav-link" to="/settings">
+              Settings
+            </router-link>
           </li>
           <li v-if="username" class="nav-item">
             <router-link class="nav-link" :to="'/@' + username">

@@ -47,3 +47,10 @@ export interface ArticlesResponse {
 export interface ProfileResponse {
     profile: Profile;
 }
+export interface UserForUpdate {
+    email?: string;
+    username?: string;
+    bio?: string;
+    password?: string;
+    image?: string;
+}
