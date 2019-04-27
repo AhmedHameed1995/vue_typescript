@@ -1,27 +1,27 @@
-import { VuexModule, Module, getModule } from 'vuex-module-decorators';
+import { VuexModule, Module, getModule, Mutation, Action } from 'vuex-module-decorators';
 import store from '@/store';
-
-interface Profile {
-    username: string;
-    bio: string;
-    image: string;
-    following: boolean;
-}
-
-interface User {
-    email: string;
-    token: string;
-    username: string;
-    bio: string;
-    image?: null;
-}
+import { Article } from '../models';
+import * as api from '@/store/api';
 
 @Module({
+    dynamic: true,
     namespaced: true,
-    name: 'users',
+    name: 'articles',
     store,
 })
-class UserModule extends VuexModule {
+class ArticleModule extends VuexModule {
+    public globalFeed: Article[] = [];
+    public userFeed: Article[] = [];
 
+    @Mutation
+    public setGlobalFeed(articles: Article[]) {
+        this.globalFeed = articles;
+    }
+
+    @Action({commit: 'setGlobalFeed'})
+    public async refreshGlobalFeed() {
+        const globalFeed = await api.getGlobalFeed();
+        return globalFeed.articles;
+    }
 }
-export default getModule(UserModule);
+export default getModule(ArticleModule);
