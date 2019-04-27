@@ -90,7 +90,6 @@
 import { Vue, Component } from 'vue-property-decorator';
 import users from '@/store/modules/users';
 
-@Component
 export default class Profile extends Vue {
     created() {
         users.loadProfile(this.$route.params.username);
