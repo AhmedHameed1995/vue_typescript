@@ -9,9 +9,9 @@
           <a href="">Need an account?</a>
         </p>
 
-        <!-- <ul class="error-messages">
-          <li>That email is already taken</li>
-        </ul> -->
+        <ul class="error-messages" v-if="loginError">
+          <li>{{loginError}}</li>
+        </ul>
 
         <form>
           <fieldset class="form-group">
@@ -38,11 +38,15 @@ import users from '@/store/modules/users';
 export default class Login extends Vue {
   public email = '';
   public password = '';
+  public loginError = '';
 
   public login() {
     users.login({
       email: this.email,
       password: this.password,
+    }).then(() => this.$router.push('/'))
+    .catch((err) => {
+      this.loginError = 'Invalid User or Password';
     });
   }
 

@@ -4,7 +4,6 @@ export interface Profile {
     image: string;
     following: boolean;
 }
-
 export interface User {
     email: string;
     token: string;
@@ -44,4 +43,7 @@ export interface Article {
 export interface ArticlesResponse {
     articles?: Article[] | null;
     articlesCount: number;
+}
+export interface ProfileResponse {
+    profile: Profile;
 }
